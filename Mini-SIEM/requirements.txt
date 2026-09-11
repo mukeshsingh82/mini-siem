@@ -1,0 +1,20 @@
+# ═══════════════════════════════════════════════════════════════
+# Mini SIEM — Python Dependencies
+# Target: Linux (Ubuntu/Debian preferred, other distros supported)
+# Python: 3.10+
+# ═══════════════════════════════════════════════════════════════
+
+# GUI Framework
+flet>=0.28.0
+
+# Real-time file monitoring for log tailing
+watchdog>=4.0.0
+
+# NOTE:
+# The following are Python standard library (no install needed):
+#   sqlite3, os, pathlib, re, json, datetime, collections,
+#   threading, asyncio, subprocess, hashlib, logging, socket, ipaddress
+#
+# Optional (added in later steps if/when required):
+#   reportlab      -> PDF report generation (Step 15)
+#   jinja2         -> HTML report templates (Step 15)

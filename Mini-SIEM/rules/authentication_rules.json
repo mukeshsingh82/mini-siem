@@ -1,0 +1,94 @@
+{
+  "category": "authentication",
+  "description": "Detection rules for Linux authentication events (SSH, sudo, PAM)",
+  "rules": [
+    {
+      "id": "AUTH-001",
+      "name": "Multiple Failed SSH Logins",
+      "description": "Detects 5+ failed SSH login attempts from the same IP within 60 seconds",
+      "event_type": "ssh_failed_login",
+      "condition": "count_by_source_ip",
+      "threshold": 5,
+      "time_window": 60,
+      "severity": "MEDIUM",
+      "enabled": true
+    },
+    {
+      "id": "AUTH-002",
+      "name": "SSH Brute Force",
+      "description": "Detects 10+ failed SSH login attempts from same IP within 120 seconds",
+      "event_type": "ssh_failed_login",
+      "condition": "count_by_source_ip",
+      "threshold": 10,
+      "time_window": 120,
+      "severity": "HIGH",
+      "enabled": true
+    },
+    {
+      "id": "AUTH-003",
+      "name": "Successful Login After Multiple Failures",
+      "description": "Successful SSH login from an IP that had recent failed attempts",
+      "event_type": "ssh_successful_login",
+      "condition": "success_after_failures",
+      "threshold": 3,
+      "time_window": 300,
+      "severity": "CRITICAL",
+      "enabled": true
+    },
+    {
+      "id": "AUTH-004",
+      "name": "Invalid User Login Attempts",
+      "description": "Login attempt using a non-existent username",
+      "event_type": "ssh_invalid_user",
+      "condition": "count_by_source_ip",
+      "threshold": 3,
+      "time_window": 60,
+      "severity": "MEDIUM",
+      "enabled": true
+    },
+    {
+      "id": "AUTH-005",
+      "name": "Root Login",
+      "description": "Direct root login attempt detected",
+      "event_type": "ssh_root_login",
+      "condition": "single_event",
+      "threshold": 1,
+      "time_window": 0,
+      "severity": "HIGH",
+      "enabled": true
+    },
+    {
+      "id": "AUTH-006",
+      "name": "Suspicious sudo Activity",
+      "description": "Multiple sudo failures from the same user in short time",
+      "event_type": "sudo_failure",
+      "condition": "count_by_username",
+      "threshold": 3,
+      "time_window": 120,
+      "severity": "HIGH",
+      "enabled": true
+    },
+    {
+      "id": "AUTH-007",
+      "name": "Privilege Escalation Indicator",
+      "description": "sudo to root by non-privileged user shortly after login",
+      "event_type": "sudo_to_root",
+      "condition": "single_event",
+      "threshold": 1,
+      "time_window": 0,
+      "severity": "HIGH",
+      "enabled": true
+    },
+    {
+      "id": "AUTH-008",
+      "name": "Repeated Authentication Failures",
+      "description": "PAM reports repeated auth failures across services",
+      "event_type": "pam_auth_failure",
+      "condition": "count_by_username",
+      "threshold": 5,
+      "time_window": 300,
+      "severity": "MEDIUM",
+      "enabled": true
+    }
+  ]
+}

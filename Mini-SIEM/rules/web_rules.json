@@ -1,0 +1,28 @@
+{
+  "category": "web",
+  "description": "Detection rules for Apache/Nginx web server logs",
+  "rules": [
+    {
+      "id": "WEB-001",
+      "name": "Repeated HTTP 404",
+      "description": "Same source IP causing many 404 responses (possible enumeration)",
+      "event_type": "http_404",
+      "condition": "count_by_source_ip",
+      "threshold": 20,
+      "time_window": 60,
+      "severity": "MEDIUM",
+      "enabled": true
+    },
+    {
+      "id": "WEB-002",
+      "name": "Suspicious URL Pattern",
+      "description": "Requests containing suspicious payloads (../, <script>, UNION SELECT, etc.)",
+      "event_type": "http_request",
+      "condition": "url_pattern_match",
+      "threshold": 1,
+      "time_window": 0,
+      "severity": "HIGH",
+      "enabled": true
+    }
+  ]
+}

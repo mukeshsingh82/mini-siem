@@ -1,0 +1,37 @@
+# ─── Python ─────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# ─── Mini SIEM runtime data ─────────────
+database/*.db
+database/*.db-journal
+database/*.db-wal
+database/*.db-shm
+logs/*.log
+logs/samples/*.log
+reports/*.pdf
+reports/*.html
+reports/*.csv
+reports/*.json
+
+# ─── OS / Editor ────────────────────────
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# ─── Keep empty directories ─────────────
+!database/.gitkeep
+!logs/samples/.gitkeep
+!reports/.gitkeep
+!assets/.gitkeep
+!screenshots/.gitkeep

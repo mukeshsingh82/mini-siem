@@ -1,0 +1,28 @@
+{
+  "category": "network",
+  "description": "Detection rules for network-based suspicious activity",
+  "rules": [
+    {
+      "id": "NET-001",
+      "name": "Suspicious IP Activity",
+      "description": "Single IP generating high volume of events across services",
+      "event_type": "any",
+      "condition": "count_by_source_ip",
+      "threshold": 50,
+      "time_window": 300,
+      "severity": "MEDIUM",
+      "enabled": true
+    },
+    {
+      "id": "NET-002",
+      "name": "Possible Port Scan Activity",
+      "description": "Same source IP hitting many different destination ports quickly",
+      "event_type": "connection_attempt",
+      "condition": "distinct_ports_by_source_ip",
+      "threshold": 15,
+      "time_window": 60,
+      "severity": "HIGH",
+      "enabled": true
+    }
+  ]
+}
