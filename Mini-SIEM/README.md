@@ -144,7 +144,7 @@ Instead of treating alerts in isolation, the Correlation Engine continuously lin
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/Mini-SIEM.git
+git clone https://github.com/mukeshsingh82/Mini-SIEM.git
 cd Mini-SIEM
 ```
 
