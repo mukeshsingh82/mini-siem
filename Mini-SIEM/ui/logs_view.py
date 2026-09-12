@@ -359,7 +359,18 @@ class LogsView(ft.Container):
             actions_alignment=ft.MainAxisAlignment.END,
         )
 
+    def _safe_page_refresh(self):
+        if self.page_ref is None:
+            return
+        try:
+            self.page_ref.update()
+        except Exception:
+            pass
+
     def _open_inspect_modal(self, event: Dict[str, Any]):
+        if self.page_ref is None:
+            return
+
         details = ft.Column(
             [
                 ft.Text("Event Summary", size=16, weight="bold", color=TEXT_WHITE),
@@ -378,14 +389,17 @@ class LogsView(ft.Container):
             scroll=ft.ScrollMode.AUTO,
             height=400,
         )
+
         self.details_modal.content = details
         self.page_ref.dialog = self.details_modal
         self.details_modal.open = True
-        self.page_ref.update()
+        self._safe_page_refresh()
 
     def _close_inspect_modal(self):
+        if self.page_ref is None:
+            return
         self.details_modal.open = False
-        self.page_ref.update()
+        self._safe_page_refresh()
 
     def _export_logs(self, fmt: str):
         if fmt not in {"csv", "json"}:
@@ -575,4 +589,5 @@ class LogsView(ft.Container):
             self.page_ref.overlay.append(snack)
             snack.open = True
             self.page_ref.update()
+
 

@@ -19,7 +19,8 @@ from modules.alert_manager import AlertManager
 from ui.theme import (
     SURFACE_COLOR, SURFACE_ALT, BORDER_COLOR, TEXT_WHITE, TEXT_MUTED,
     COLOR_LOW, COLOR_GREEN, COLOR_HIGH, COLOR_CRITICAL, COLOR_PURPLE,
-    create_card, create_severity_badge, create_section_header, get_severity_color, get_status_color
+    create_card, create_severity_badge, create_section_header,
+    get_severity_color, get_status_color, app_border
 )
 
 
@@ -381,6 +382,9 @@ class AlertsView(ft.Container):
             return []
 
     def _open_inspect_modal(self, alert: Dict[str, Any]):
+        if self.page_ref is None:
+            return
+
         self.active_inspected_alert = alert
 
         def meta_item(label: str, val: Any, color: str = TEXT_WHITE) -> ft.Container:
@@ -521,6 +525,8 @@ class AlertsView(ft.Container):
         self.page_ref.update()
 
     def _close_inspect_modal(self):
+        if self.page_ref is None:
+            return
         self.details_modal.open = False
         self.page_ref.update()
 

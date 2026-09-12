@@ -668,6 +668,8 @@ class RulesView(ft.Container):
     def _safe_page_refresh(self):
         if self.page_ref is None:
             return
+        if getattr(self, "page", None) is None:
+            return
         try:
             self.page_ref.update()
         except Exception:
@@ -679,6 +681,8 @@ class RulesView(ft.Container):
 
     def _show_snack(self, message: str, is_error: bool = False):
         if self.page_ref is None:
+            return
+        if getattr(self, "page", None) is None:
             return
         snack = ft.SnackBar(
             content=ft.Text(message, color="#FFFFFF"),
