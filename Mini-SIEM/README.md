@@ -315,4 +315,4 @@ Mini SIEM is a **defensive cybersecurity monitoring platform** designed for educ
 
 Distributed under the **MIT License**. See `LICENSE` for more information.
 
-Developed by **Your Name** — [GitHub Profile](https://github.com/yourusername)
+Developed by Mukesh Singh — [GitHub Profile](https://github.com/mukeshsingh82)
